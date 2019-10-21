@@ -32,10 +32,11 @@ class Park < ApplicationRecord
     if self.left_in.nil?
       time_spent = 'Still parked'
     else
-      time_spent = (self.left_in - self.created_at)
-      time_minutes = (time_spent / 1.minute).round
+      time_diff = (self.left_in - self.created_at)
+      time_minutes = (time_diff / 1.minute).round
+      time_spent = "#{time_minutes} minute(s)"
     end
-    return {id: self.id, time: "#{time_minutes} minute(s)", paid: self.paid, left: self.left}
+    return {id: self.id, time: time_spent, paid: self.paid, left: self.left}
   end
 
   def check_plate_is_not_parked
