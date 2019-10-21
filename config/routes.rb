@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # resources :parks, :path => "parking"
+  scope '/parking' do
+    get '/', to: "parks#index"
+    get '/:plate', to: "parks#show"
+    post '/', to: "parks#create"
+    put '/:id/pay', to: "parks#pay"
+    put '/:id/out', to: "parks#out"
+  end
 end
